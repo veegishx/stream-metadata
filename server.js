@@ -22,10 +22,10 @@ app.use('/getStreamInfo', function (request, response, next) {
     ffmpeg.ffprobe(streamUrl, function(err, metadata) {
       if (err) {
         console.log(err)
-        response.send({error: "could not parse stream", source: streamUrl});  
+        response.send({status: 404, source: streamUrl, data: "could not parse stream"});  
       } else {
         console.log(metadata)
-        response.send(metadata);  
+        response.send({status: 200, source: streamUrl, data: metadata});  
       } 
     });     
 });
@@ -36,10 +36,10 @@ app.use('/getStreamBitrate', function (request, response, next) {
     ffmpeg.ffprobe(streamUrl, function(err, metadata) {
       if (err) {
         console.log(err)
-        response.send({error: "could not parse stream", source: streamUrl});  
+        response.send({status: 404, source: streamUrl, data: "could not parse stream"});  
       } else {
         console.log(metadata.streams[0]?.bit_rate)
-        response.send({bitrate: metadata.streams[0]?.bit_rate});  
+        response.send({status: 200, source: streamUrl, data: metadata.streams[0]?.bit_rate});  
       } 
     });     
 });
