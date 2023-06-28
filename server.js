@@ -31,7 +31,7 @@ app.use('/getStreamInfo', function (request, response, next) {
 });
 
 // Get video stream bitrate
-app.use('/getStreamBitRate', function (request, response, next) {
+app.use('/getStreamBitrate', function (request, response, next) {
     const streamUrl = request?.body?.streamUrl;
     ffmpeg.ffprobe(streamUrl, function(err, metadata) {
       if (err) {
